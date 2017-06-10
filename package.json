@@ -1,0 +1,34 @@
+{
+  "name": "yapb",
+  "version": "0.0.0",
+  "description": "Yet Another Procastination Blocker",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron index.js",
+    "pack": "build --dir",
+    "dist": "build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SrKomodo/yapb.git"
+  },
+  "author": "SrKomodo",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/SrKomodo/yapb/issues"
+  },
+  "homepage": "https://github.com/SrKomodo/yapb#readme",
+  "dependencies": {
+    "ps-node": "^0.1.6"
+  },
+  "build": {
+    "appId": "com.srkomodo.yapb",
+    "mac": {
+      "category": "Utility"
+    }
+  },
+  "devDependencies": {
+    "electron": "^1.6.10",
+    "electron-builder": "^18.6.2"
+  }
+}

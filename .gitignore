@@ -46,3 +46,7 @@ jspm_packages
 # Yarn Integrity file
 .yarn-integrity
 
+dist/**/*
+!dist/background.png
+!dist/icon.icns
+!dist/icon.ico
