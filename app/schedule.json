@@ -1,0 +1,15 @@
+[
+  {
+    "starts": "16:00:00",
+    "ends": "18:00:00",
+    "days": "1111100",
+    "blocks": {
+      "websites": [
+        "reddit.com"
+      ],
+      "programs": [
+        "Steam.exe"
+      ]
+    }
+  }
+]
