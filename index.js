@@ -1,4 +1,4 @@
-const {app, BrowserWindow, Tray} = require("electron");
+const {app, BrowserWindow, Tray, Menu} = require("electron");
 const path = require("path");
 const url = require("url");
 
@@ -6,16 +6,6 @@ let win;
 
 function createWindow () {
   const {screen} = require("electron");
-
-  const tray = new Tray(path.join(__dirname, "app", "icon.png"));
-
-  tray.on("click", () => {
-    if (!win.isFocused()) {
-      win.show();
-    } else {
-      console.log("nah");
-    }
-  });
 
   win = new BrowserWindow({
     x: screen.getPrimaryDisplay().workArea.width - 400,
@@ -42,9 +32,19 @@ function createWindow () {
   win.on("closed", () => {
     win = null;
   });
+
+  const tray = new Tray(path.join(__dirname, "app", "icon.png"));
+
+  const contextMenu = Menu.buildFromTemplate([
+    {label: "Close", type: "normal", click: () => {app.quit();}}
+  ]);
+  tray.setContextMenu(contextMenu);
+  tray.setToolTip("Yet Another Procastination Blocker");
+
+  tray.on("click", () => {
+    win.show();
+  });
 }
-
-
 
 app.on("ready", createWindow);
 
