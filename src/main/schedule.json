@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Test",
+    "starts": {
+      "h": 16,
+      "m": 0
+    },
+    "ends": {
+      "h": 18,
+      "m": 0
+    },
+    "days": [2, 3, 4, 5, 6],
+    "blocks": {
+      "websites": [
+        "reddit.com"
+      ],
+      "programs": [
+        "Steam.exe"
+      ]
+    }
+  }
+]

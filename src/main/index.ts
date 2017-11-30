@@ -1,10 +1,9 @@
-"use strict";
-
 import { app, BrowserWindow, Tray, Menu } from "electron";
-const path = require("path");
+import * as path from "path";
+import { initialize } from "./scheduler";
 const isDevelopment = process.env.NODE_ENV !== "production";
 
-let mainWindow;
+let mainWindow : BrowserWindow|null;
 
 function createMainWindow() {
   const { screen } = require("electron");
@@ -71,4 +70,5 @@ app.on("activate", () => {
 
 app.on("ready", () => {
   mainWindow = createMainWindow();
+  initialize();
 });
