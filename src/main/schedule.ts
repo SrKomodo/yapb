@@ -44,6 +44,11 @@ class Schedule {
       `${entry.ends.m} ${entry.ends.h} * * ${entry.days.join(",")}`,
       this.endBlock
     );
+
+    // If we are already on the blocking time
+    if(this.startTime.nextInvocation().getTime() - this.endTime.nextInvocation().getTime() > 0) {
+      this.startBlock();
+    }
   }
 
   startBlock() {
