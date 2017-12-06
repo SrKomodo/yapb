@@ -1,9 +1,9 @@
-import { app, BrowserWindow, Tray, Menu } from "electron";
+import { app, BrowserWindow, Menu, Tray } from "electron";
 import * as path from "path";
 import { initialize } from "./scheduler";
 const isDevelopment = process.env.NODE_ENV !== "production";
 
-let mainWindow : BrowserWindow|null;
+let mainWindow: BrowserWindow|null;
 
 function createMainWindow() {
   const { screen } = require("electron");
@@ -11,7 +11,8 @@ function createMainWindow() {
   const window = new BrowserWindow({
     x: screen.getPrimaryDisplay().workArea.width - 400,
     y: screen.getPrimaryDisplay().workArea.height - 200,
-    width: 400, height: 200,
+    width: 400,
+    height: 200,
     resizable: false,
     movable: false,
     show: true,
@@ -38,7 +39,7 @@ function createMainWindow() {
     mainWindow = null;
   });
 
-  const tray = new Tray(path.join(__dirname,"icon.png"));
+  const tray = new Tray(path.join(__dirname, "icon.png"));
 
   const contextMenu = Menu.buildFromTemplate([
     { label: "Close", type: "normal", click: () => { app.quit(); } }
@@ -61,11 +62,11 @@ function createMainWindow() {
 }
 
 app.on("window-all-closed", () => {
-  if (process.platform !== "darwin") app.quit();
+  if (process.platform !== "darwin") {app.quit(); }
 });
 
 app.on("activate", () => {
-  if (mainWindow === null) mainWindow = createMainWindow();
+  if (mainWindow === null) {mainWindow = createMainWindow(); }
 });
 
 app.on("ready", () => {

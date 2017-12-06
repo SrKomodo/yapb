@@ -1,66 +1,57 @@
-import * as later from "later";
-import { join } from "path";
+import { Job, scheduleJob } from "node-schedule";
 
-const hostFileLocation = process.platform === "win32"
-  ? join(process.env.SystemRoot, "System32", "drivers", "etc", "hosts")
-  : join("etc", "hosts");
+// import { join } from "path";
+
+// const hostFileLocation = process.platform === "win32"
+//   ? join(process.env.SystemRoot, "System32", "drivers", "etc", "hosts")
+//   : join("etc", "hosts");
 
 interface Time {
-  h: number,
-  m: number
+  h: number;
+  m: number;
 }
 
 interface ScheduleEntry {
-  name: string,
-  starts: Time
-  ends: Time
-  days: number[],
+  name: string;
+  starts: Time;
+  ends: Time;
+  days: number[];
   blocks: {
     websites: string[],
     programs: string[]
-  }
+  };
 }
 
 class Schedule {
-  startTime: later.ScheduleData
-  endTime: later.ScheduleData
-  name: string
+  startTime: Job;
+  endTime: Job;
+  name: string;
   blocks: {
-    websites: string[]
+    websites: string[],
     programs: string[]
-  }
-  
+  };
+
   constructor(entry: ScheduleEntry) {
-    this.startTime = {
-      schedules: [{
-        h: [entry.starts.h],
-        m: [entry.starts.m],
-        dw: entry.days
-      }],
-      exceptions: [],
-      error: 0
-    }
-
-    this.endTime = {
-      schedules: [{
-        h: [entry.ends.h],
-        m: [entry.ends.m],
-        dw: entry.days
-      }],
-      exceptions: [],
-      error: 0
-    }
-
     this.name = entry.name;
     this.blocks = entry.blocks;
 
-    later.setInterval(() => {
-      console.log("start");
-    }, this.startTime);
+    this.startTime = scheduleJob(
+      `${entry.starts.m} ${entry.starts.h} * * ${entry.days.join(",")}`,
+      this.startBlock
+    );
 
-    later.setInterval(() => {
-      console.log("end");
-    }, this.endTime);
+    this.endTime = scheduleJob(
+      `${entry.ends.m} ${entry.ends.h} * * ${entry.days.join(",")}`,
+      this.endBlock
+    );
+  }
+
+  startBlock() {
+    console.log("start");
+  }
+
+  endBlock() {
+    console.log("end");
   }
 }
 
