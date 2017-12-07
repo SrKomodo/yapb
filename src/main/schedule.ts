@@ -6,22 +6,6 @@ import { Job, scheduleJob } from "node-schedule";
 //   ? join(process.env.SystemRoot, "System32", "drivers", "etc", "hosts")
 //   : join("etc", "hosts");
 
-interface Time {
-  h: number;
-  m: number;
-}
-
-interface ScheduleEntry {
-  name: string;
-  starts: Time;
-  ends: Time;
-  days: number[];
-  blocks: {
-    websites: string[],
-    programs: string[]
-  };
-}
-
 class Schedule {
   startTime: Job;
   endTime: Job;
@@ -60,4 +44,4 @@ class Schedule {
   }
 }
 
-export {Schedule, ScheduleEntry};
+export {Schedule};

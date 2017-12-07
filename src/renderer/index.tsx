@@ -1,7 +1,14 @@
+import "./style.css";
+
+import fs from "fs";
+import path from "path";
+
 import React from "react";
 import ReactDOM from "react-dom";
+import { App } from "./components/app/app";
+
 
 ReactDOM.render(
-  <h1>Hello, world!</h1>,
+  <App schedules={JSON.parse(fs.readFileSync(path.join(__static, "schedule.json"), "utf8")) as ScheduleEntry[]}/>,
   document.getElementById("app")
 );

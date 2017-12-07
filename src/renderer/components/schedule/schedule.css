@@ -1,0 +1,16 @@
+.schedule {
+  width: 100%;
+}
+
+.name, .time {
+  display: inline-block;
+  width: 50%;
+}
+
+.time {
+  text-align: right;
+}
+
+.schedule progress {
+  width: 100%;
+}
