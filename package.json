@@ -19,16 +19,21 @@
   },
   "dependencies": {
     "@types/node-schedule": "^1.2.1",
+    "@types/react": "^16.0.27",
+    "@types/react-dom": "^16.0.3",
     "node-schedule": "^1.2.5",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
     "source-map-support": "^0.5.0"
   },
   "devDependencies": {
+    "babel-preset-react": "^6.24.1",
     "electron": "1.7.9",
-    "electron-builder": "^19.42.1",
-    "electron-webpack": "1.10.1",
+    "electron-builder": "^19.48.2",
+    "electron-webpack": "1.11.0",
     "electron-webpack-ts": "^1.2.0",
     "typescript": "^2.6.2",
-    "webpack": "^3.8.1"
+    "webpack": "^3.10.0"
   },
   "resolutions": {
     "webpack-sources": "1.0.1"
