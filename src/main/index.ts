@@ -39,7 +39,7 @@ function createMainWindow() {
     mainWindow = null;
   });
 
-  const tray = new Tray(path.join(__dirname, "icon.png"));
+  const tray = new Tray(path.join(__static, "icon.png"));
 
   const contextMenu = Menu.buildFromTemplate([
     { label: "Close", type: "normal", click: () => { app.quit(); } }
