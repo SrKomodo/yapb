@@ -2,15 +2,36 @@
   width: 100%;
 }
 
-.name, .time {
+.schedule .name,.schedule .time {
   display: inline-block;
   width: 50%;
 }
 
-.time {
+.schedule .time {
   text-align: right;
 }
 
+.schedule .edit {
+  transition: opacity .1s, width .2s;
+  display: inline-block;
+  opacity: 0;
+  width: 0;
+}
+
+.schedule:hover .edit {
+  opacity: 1;
+  width: 15px;
+}
+
 .schedule progress {
+  -webkit-appearance: none;
   width: 100%;
+}
+
+.schedule ::-webkit-progress-bar {
+  background: #333;
+}
+
+.schedule ::-webkit-progress-value {
+  background: #999;
 }

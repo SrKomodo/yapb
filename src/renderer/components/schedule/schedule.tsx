@@ -15,7 +15,10 @@ function Schedule(props: Props) {
   return (
     <div className="schedule">
       <div>
-        <span className="name">{props.name}</span>
+        <span className="name">
+          <span className="edit">✎</span>
+          {props.name}
+        </span>
         <span className="time">Ends {timeLeft.fromNow()}</span>
       </div>
       <div>
