@@ -1,0 +1,37 @@
+.schedule {
+  width: 100%;
+
+  .name, .time {
+    display: inline-block;
+    width: 50%;
+  }
+
+  .time {
+    text-align: right;
+  }
+
+  .edit {
+    transition: opacity .1s, width .2s;
+    display: inline-block;
+    opacity: 0;
+    width: 0;
+  }
+
+  &:hover .edit {
+    opacity: 1;
+    width: 15px;
+  }
+
+  progress {
+    -webkit-appearance: none;
+    width: 100%;
+  }
+
+  ::-webkit-progress-bar {
+    background: #333;
+  }
+
+  ::-webkit-progress-value {
+    background: #999;
+  }
+}
