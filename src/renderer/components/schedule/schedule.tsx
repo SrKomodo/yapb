@@ -1,3 +1,4 @@
+import { RecurrenceRule } from "node-schedule";
 import "./schedule.scss";
 
 import React from "react";
@@ -11,7 +12,25 @@ interface Props {
 }
 
 function Schedule(props: Props) {
-  const timeLeft = moment(`${props.ends.h} ${props.ends.m}`, "hh mm");
+  const now = new Date();
+  const startInterval = new RecurrenceRule(
+    undefined, undefined, undefined,
+    props.days,
+    props.starts.h,
+    props.starts.m
+  ).nextInvocationDate(now);
+
+  const endInterval = new RecurrenceRule(
+    undefined, undefined, undefined,
+    props.days,
+    props.ends.h,
+    props.ends.m
+  ).nextInvocationDate(now);
+
+  const caption = startInterval < endInterval ?
+    "Starts " + moment(startInterval).fromNow() :
+    "Ends " + moment(endInterval).fromNow()
+
   return (
     <div className="schedule">
       <div>
@@ -19,7 +38,7 @@ function Schedule(props: Props) {
           <span className="edit">✎</span>
           {props.name}
         </span>
-        <span className="time">Ends {timeLeft.fromNow()}</span>
+        <span className="time">{caption}</span>
       </div>
       <div>
         <progress value="70" max="100"/>
