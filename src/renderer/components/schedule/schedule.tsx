@@ -9,10 +9,8 @@ const dummyCronExpression = (false as true) && parseExpression("");
 type CronExpression = typeof dummyCronExpression;
 
 interface Props {
-  name: string;
-  starts: Time;
-  ends: Time;
-  days: number[];
+  schedule: ScheduleEntry;
+  onClick: (schedule: ScheduleEntry) => any; 
 }
 
 interface State {
@@ -27,39 +25,29 @@ class Schedule extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {progress: 0}
-
-    this.startInterval = parseExpression(
-      `${this.props.starts.m} ${this.props.starts.h} * * ${this.props.days.join(",")}`
-    );
-
-    this.endInterval = parseExpression(
-      `${this.props.ends.m} ${this.props.ends.h} * * ${this.props.days.join(",")}`
-    );
+    this.resetIntervals();
   }
 
   resetIntervals() {
-    this.startInterval.reset();
-    this.endInterval.reset();
-  }
-
-  setProgressIntervals() {
     this.startInterval = parseExpression(
-      `${this.props.starts.m} ${this.props.starts.h} * * ${this.props.days.join(",")}`
+      `${this.props.schedule.starts.m} ${this.props.schedule.starts.h} * * ${this.props.schedule.days.join(",")}`
     );
 
     this.endInterval = parseExpression(
-      `${this.props.ends.m} ${this.props.ends.h} * * ${this.props.days.join(",")}`
+      `${this.props.schedule.ends.m} ${this.props.schedule.ends.h} * * ${this.props.schedule.days.join(",")}`
     );
+  }
 
+  setProgressIntervals() {
+
+    this.resetIntervals();
     const nextStart = this.startInterval.next().toDate();
     const nextEnd = this.endInterval.next().toDate();
     
     this.resetIntervals();
-
     const prevStart = this.startInterval.prev().toDate();
     const prevEnd = this.startInterval.prev().toDate();
 
-    this.resetIntervals();
 
     const start = prevStart > prevEnd ? prevStart : prevEnd;
     const end = nextStart < nextEnd ? nextStart : nextEnd;
@@ -90,12 +78,16 @@ class Schedule extends React.Component<Props, State> {
     clearInterval(this.timer);
   }
 
+  handleClick() {
+    this.props.onClick(this.props.schedule);
+  }
+
   render() {
+    this.resetIntervals();
+
     const nextStart = this.startInterval.next().toDate();
     const nextEnd = this.endInterval.next().toDate();
 
-    this.resetIntervals();
-    
     const caption = nextStart < nextEnd ?
     "Starts " + moment(nextStart).fromNow() :
       "Ends " + moment(nextEnd).fromNow();
@@ -104,8 +96,8 @@ class Schedule extends React.Component<Props, State> {
       <div className="schedule">
         <div>
           <span className="name">
-            <span className="edit">✎</span>
-            {this.props.name}
+            <span onClick={this.handleClick.bind(this)} className="edit">✎</span>
+            {this.props.schedule.name}
           </span>
           <span className="time">{caption}</span>
         </div>

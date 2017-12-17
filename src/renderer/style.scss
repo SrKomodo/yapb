@@ -1,0 +1,19 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  color: #aaa;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.editing {
+  .editSchedule {
+    display: inline-block;
+  }
+
+  .schedules {
+    display: none;
+  }
+}
