@@ -1,0 +1,29 @@
+.timeInput {
+  font-size: 3em;
+  vertical-align: middle;
+  font-family: monospace;
+  
+  input[type=number] {
+    width: 2ch;
+    background: transparent;
+    border: none;
+    padding: 0;
+    color: inherit;
+    font-size: inherit;
+    font-family: inherit;
+
+    &:focus {
+      outline: none;
+    }
+
+    &::-webkit-inner-spin-button, 
+    &::-webkit-outer-spin-button { 
+      -webkit-appearance: none; 
+      margin: 0; 
+    }
+
+    &:first-child {
+      text-align: right;
+    }
+  }
+}

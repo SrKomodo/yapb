@@ -9,11 +9,13 @@ body {
 }
 
 .editing {
-  .editSchedule {
-    display: inline-block;
-  }
-
   .schedules {
+    display: none;
+  }
+}
+
+.notEditing {
+  .editSchedule {
     display: none;
   }
 }

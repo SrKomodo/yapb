@@ -1,4 +1,58 @@
 .editSchedule {
-  display: none;
-  padding: 10px;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px 10px 5px 10px;
+
+  .header {
+    span:last-child {
+      float: right;
+      cursor: pointer;
+    }
+  }
+
+  .timeInputs {
+    display: flex;
+    justify-content: space-around;
+
+    div:first-child {
+      text-align: center;
+    }
+  }
+
+  .blockInputs {
+    display: flex;
+
+    & > div {
+      flex-grow: 1;
+
+      div {
+        text-align: center;
+      }
+
+      &:first-child input {
+        border-right: none;
+      }
+
+      input {
+        font-family: monospace;
+        background: transparent;
+        padding: 5px;
+        border: 1px solid currentColor;
+        color: inherit;
+        resize: none;
+        width: 100%;
+  
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+  }
+
+  .dayInputs {
+    display: flex;
+  }
 }

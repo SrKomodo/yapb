@@ -1,0 +1,21 @@
+.dayInput {
+  padding-top: 5px;
+  flex-grow: 1;
+  text-align: center;
+
+  input[type=checkbox] {
+    display: none;
+    &:checked+label {
+      border: none;
+      background: #aaa;
+    }
+    
+    &+label {
+      display: inline-block;
+      width: 13px;
+      height: 13px;
+      border: 1px solid #aaa;
+      background: #333;
+    }
+  }
+}

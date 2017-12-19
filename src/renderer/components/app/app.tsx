@@ -1,5 +1,7 @@
 import React from "react";
 
+import cloneObj from "../../cloneOjb";
+
 import { Schedule } from "../schedule/schedule";
 import { EditSchedule } from "../editSchedule/editSchedule";
 
@@ -33,24 +35,28 @@ class App extends React.Component<Props, State> {
 
   handleScheduleClick(scheduleToEdit: ScheduleEntry) {
     this.setState({
-      scheduleToEdit,
+      scheduleToEdit: cloneObj(scheduleToEdit) as ScheduleEntry,
       isEditing: true
     });
   }
 
-  handleSettingsClick() {
+  handleCloseClick() {
     this.setState({
+      scheduleToEdit: undefined,
       isEditing: false
     })
   }
 
   render() {
+    const editor = typeof this.state.scheduleToEdit === "undefined"
+      ? null
+      : <EditSchedule onClose={this.handleCloseClick.bind(this)} schedule={this.state.scheduleToEdit} />
     const schedules = this.state.schedules.map(schedule =>
       <Schedule onClick={this.handleScheduleClick.bind(this)} schedule={schedule} key={schedule.name} />
     );
     return (
-      <div className={this.state.isEditing ? "editing" : ""}>
-        <EditSchedule onClick={this.handleSettingsClick.bind(this)} schedule={this.state.scheduleToEdit}/>
+      <div className={this.state.isEditing ? "editing" : "notEditing"}>
+        {editor}
         <div className="schedules">
           {schedules}
         </div>
