@@ -5,7 +5,7 @@ import cloneObj from "../../cloneOjb";
 import { Schedule } from "../schedule/schedule";
 import { EditSchedule } from "../editSchedule/editSchedule";
 
-import { readFile } from "fs";
+import { readFile, writeFile } from "fs";
 import { join } from "path";
 
 interface Props {
@@ -40,11 +40,19 @@ class App extends React.Component<Props, State> {
     });
   }
 
-  handleCloseClick() {
-    this.setState({
-      scheduleToEdit: undefined,
-      isEditing: false
-    })
+  handleCloseClick(schedule: ScheduleEntry) {
+    const index = this.state.schedules.findIndex(value => value.name === schedule.name);
+    this.setState(prevState => {
+      const newSchedules = (cloneObj(prevState) as State).schedules;
+      newSchedules.splice(index, 1, schedule);
+      return {
+        scheduleToEdit: undefined,
+        isEditing: false,
+        schedules: newSchedules
+      }
+    }, () => {
+      writeFile(join(__static, "schedule.json"), JSON.stringify(this.state.schedules), err => {throw err});
+    });
   }
 
   render() {

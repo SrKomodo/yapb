@@ -6,7 +6,7 @@ import { DayInput } from "../dayInput/dayInput";
 
 interface Props {
   schedule: ScheduleEntry;
-  onClose: () => any;
+  onClose: (schedule: ScheduleEntry) => any;
 }
 
 class EditSchedule extends React.Component<Props, ScheduleEntry> {
@@ -20,7 +20,13 @@ class EditSchedule extends React.Component<Props, ScheduleEntry> {
   }
 
   handleClose() {
-    this.props.onClose();
+    this.props.onClose({
+      blocks: this.state.blocks,
+      days: this.state.days,
+      ends: this.state.ends,
+      name: this.state.name,
+      starts: this.state.starts
+    });
   }
 
   handleStartChange(starts: { h: number, m: number }) {
